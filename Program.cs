@@ -65,12 +65,6 @@ namespace AccountTransfer
         {
             var transfers = new List<Func<Task<string>>>();
 
-            var gasEstimate = await web3.Eth.Transactions.EstimateGas.SendRequestAsync(new CallInput()
-            {
-                From = from,
-                To = toAdresses[0],
-                Value = new HexBigInteger(amount),
-            });
           
             foreach (var to in toAdresses)
             {
@@ -80,7 +74,6 @@ namespace AccountTransfer
                         From = from,
                         To = to,
                         Value = new HexBigInteger(amount),
-                        GasPrice =  gasEstimate
                     }));
             }
             var pollingService = new TransactionReceiptPollingService(web3);
