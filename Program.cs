@@ -10,8 +10,8 @@ using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
-using Nethereum.Web3.Transactions;
 using System.Numerics;
+using Nethereum.Web3.Transactions;
 
 namespace AccountTransfer
 {
