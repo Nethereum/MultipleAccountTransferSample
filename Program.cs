@@ -11,7 +11,7 @@ using Nethereum.RPC.Eth;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
 using System.Numerics;
-using Nethereum.Web3.Transactions;
+using Nethereum.Web3.TransactionReceipts;
 
 namespace AccountTransfer
 {
@@ -43,18 +43,18 @@ namespace AccountTransfer
             await web3.Miner.Start.SendRequestAsync(6);
             var initialBalance = await web3.Eth.GetBalance.SendRequestAsync(address);
             //2 Ether
-            var transactionReceiptsInitial = await TransferEqualAmounts(web3, address, web3.Convert.ToWei(2), accounts.ToArray());
+            var transactionReceiptsInitial = await TransferEqualAmounts(web3, address, Web3.Convert.ToWei(2), accounts.ToArray());
 
             var mainAccountBalance = await web3.Eth.GetBalance.SendRequestAsync(address);
            
             var account1Balance = await web3.Eth.GetBalance.SendRequestAsync(accounts[0]);
 
             await web3.Personal.UnlockAccount.SendRequestAsync(accounts[0], defaultPassword, 60000);
-            var transactionReceipts2 = await TransferEqualAmounts(web3, accounts[0], web3.Convert.ToWei(0.01), accounts.Where( x => x != accounts[0]).ToArray());
+            var transactionReceipts2 = await TransferEqualAmounts(web3, accounts[0], Web3.Convert.ToWei(0.01), accounts.Where( x => x != accounts[0]).ToArray());
             var account2Balance = await web3.Eth.GetBalance.SendRequestAsync(accounts[1]);
 
             await web3.Personal.UnlockAccount.SendRequestAsync(accounts[1], defaultPassword, 60000);
-            var transactionReceipts3 = await TransferEqualAmounts(web3, accounts[1], web3.Convert.ToWei(0.001), accounts.Where(x => x != accounts[1]).ToArray());
+            var transactionReceipts3 = await TransferEqualAmounts(web3, accounts[1], Web3.Convert.ToWei(0.001), accounts.Where(x => x != accounts[1]).ToArray());
             var account3Balance = await web3.Eth.GetBalance.SendRequestAsync(accounts[1]);
 
             await web3.Miner.Stop.SendRequestAsync();
