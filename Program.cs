@@ -11,7 +11,7 @@ using Nethereum.RPC.Eth;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
 using System.Numerics;
-using Nethereum.Web3.TransactionReceipts;
+using Nethereum.RPC.TransactionReceipts;
 
 namespace AccountTransfer
 {
@@ -76,8 +76,8 @@ namespace AccountTransfer
                         Value = new HexBigInteger(amount),
                     }));
             }
-            var pollingService = new TransactionReceiptPollingService(web3);
-            return await pollingService.SendRequestAsync(transfers);
+            var pollingService = new TransactionReceiptPollingService(web3.TransactionManager);
+            return await pollingService.SendRequestsAsync(transfers);
         }
 
     }
